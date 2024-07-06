@@ -1,0 +1,22 @@
+body {
+    background-color: rgba(100, 148, 237, 0.473);
+}
+
+#menu {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: 2px black solid;
+    background-color: #41bcb0;
+}
+
+button {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    width:100%;
+    border: 2px solid #2196f3; 
+    margin: 5px;
+}
