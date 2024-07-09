@@ -6,12 +6,41 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello</h1>
-
+    
+    
+    <form>
+      <fieldset>
+        <legend>Contact Details</legend>
+        <label>Name:<br />
+            <input type="text" name="name">
+        </label>
+        <br />
+        <label>Email:<br />
+            <input type="text" name="email">
+        </label>
+        <br />
+        <p>
+            <label for="comments">
+                Comments:
+            </label>
+            <br />
+            <textarea rows="4" cols="40" id="comments">
+            </textarea>
+        </p>
+        <br />
+        <input type="submit" value="Submit">
+      </fieldset>
+    </form>
+    
+    <!-- footer with link to home page -->
+    <br />
     <footer>
-        <a href="">
+        <a href="/index.html">
             <button>Home Page</button>
          </a>
     </footer>
+
+    <!-- js file -->
+    <script src="../js/comment.js"></script>
 </body>
 </html>
