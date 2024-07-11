@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Comment / Post Validation</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/comment-form.css" />
+    <!-- Favicon -->
+
 </head>
 <body>
     
     
     <form>
       <fieldset>
-        <legend>Contact Details</legend>
+        <legend>Comment Form</legend>
         <label>Name:<br />
-            <input type="text" name="name">
+            <input type="text" name="name" id="name">
+            <span id="name-icon"></span>
         </label>
         <br />
         <label>Email:<br />
             <input type="text" name="email">
+            <span id="email-icon"></span>
         </label>
         <br />
         <p>
@@ -28,7 +34,7 @@
             </textarea>
         </p>
         <br />
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit" id="submit">
       </fieldset>
     </form>
     

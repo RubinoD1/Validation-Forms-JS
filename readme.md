@@ -2,7 +2,7 @@
 
 A collection of form validation forms.
 
-
+Client side validation is performed by a web browser, before input is sent to a web server.
 
 ## To-do 
 
