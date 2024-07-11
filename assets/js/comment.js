@@ -1,16 +1,21 @@
 const submit = document.getElementById("submit");
 const userName = document.getElementById("name");
+const email = document.getElementById("email");
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//email reg expression validation
 
 let nameError = false;//tracks if a name error message is active
+let emailError = false;//tracks if a email error message is active
 
 //on submit click confirm submit || list needed inputs 
 submit.onclick = function(event){
     console.log("hello");
     event.preventDefault();
-    checkName();
+    // checkName();
 }
     
 userName.addEventListener('input', validate);
+email.addEventListener('input', emailValidate);
 
 function validate(e){
   
@@ -48,7 +53,36 @@ function validate(e){
     }
   }
 
-  //email validation check 
+  //comment validation check 
 
 
+}
+
+function emailValidate(){
+   if (emailRegex.test(email.value)){
+    //add checkmark &#9989;
+    document.getElementById("email-icon").innerHTML = `&#9989;`;
+    //remove class invalid 
+    email.classList.remove('invalid');
+    if (emailError === true){
+      emailError = false;
+      //remove nameWarning created div
+      document.getElementById("email-warning").remove();
+    }
+   } else {
+      //add x icon &#10060;
+      document.getElementById("email-icon").innerHTML = `&#10060;`;
+      email.classList.add('invalid');
+    if (emailError === false){
+      emailError = true;
+      //input needed message -- red font below input box 
+      const emailWarning = document.createElement("div");
+      emailWarning.innerHTML = 'Invalid email'
+      emailWarning.style.color = 'red';
+      //add id to nameWarning
+      emailWarning.setAttribute("id", "email-warning");
+      //'afterend': After the targetElement itself. 
+      document.getElementById("email-icon").insertAdjacentElement("afterend", emailWarning);
+    }
+   }
 }
