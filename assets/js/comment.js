@@ -1,11 +1,22 @@
 const submit = document.getElementById("submit");
 const userName = document.getElementById("name");
 const email = document.getElementById("email");
+const comment = document.getElementById("comments");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//email reg expression validation
 
 let nameError = false;//tracks if a name error message is active
 let emailError = false;//tracks if a email error message is active
+let commentError = false;//tracks if comment error message is active 
+
+//entered fields array
+let fieldArray = [
+  {
+    id: "user name",
+    valid: false,
+    name: "",
+  }
+]
 
 //on submit click confirm submit || list needed inputs 
 submit.onclick = function(event){
@@ -15,13 +26,13 @@ submit.onclick = function(event){
 }
     
 userName.addEventListener('input', validate);
+comment.addEventListener('input', validate);
 email.addEventListener('input', emailValidate);
 
 function validate(e){
-  
   //user name validation check
   if (e.target.name == "name"){
-    if(userName.value.length > 0){
+    if(userName.value.length > 4){
       //add checkmark &#9989;
       document.getElementById("name-icon").innerHTML = `&#9989;`;
       //remove class invalid 
@@ -42,7 +53,7 @@ function validate(e){
         nameError = true;
         //input needed message -- red font below input box 
         const nameWarning = document.createElement("div");
-        nameWarning.innerHTML = 'Name must be atleast 1 character in length'
+        nameWarning.innerHTML = 'Name must be atleast 5 characters in length'
         nameWarning.style.color = 'red';
         //add id to nameWarning
         nameWarning.setAttribute("id", "name-warning");
@@ -54,8 +65,40 @@ function validate(e){
   }
 
   //comment validation check 
-
-
+  if (e.target.id == "comments"){
+    //console.log("comments working", comment.value, comment.value.length);
+    if(comment.value.length > 0){
+      console.log("valid");
+        //add checkmark &#9989;
+        document.getElementById("comments-icon").innerHTML = `&#9989;`;
+        //add class invalid 
+        comment.classList.remove('invalid');
+      if (commentError === true){
+        commentError = false;
+        //remove comment warning created div
+        document.getElementById("commentWarning").remove();
+      }
+    }
+    else {
+      console.log("invalid");
+      //add x icon &#10060;
+      document.getElementById("comments-icon").innerHTML = `&#10060;`;
+      //add class invalid 
+      comment.classList.add('invalid');
+      if (nameError === false){
+        commentError = true;
+        //input needed message -- red font below input box 
+        const commentWarning = document.createElement("div");
+        commentWarning.innerHTML = 'Comment must be atleast 1 character in length'
+        commentWarning.style.color = 'red';
+        //add id to commentWarning
+        commentWarning.setAttribute("id", "commentWarning");
+        //'afterend': After the targetElement itself. 
+        document.getElementById("comments-icon").insertAdjacentElement("afterend", commentWarning);
+      }
+    }
+  }
+  
 }
 
 function emailValidate(){
