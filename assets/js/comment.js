@@ -9,20 +9,19 @@ let nameError = false;//tracks if a name error message is active
 let emailError = false;//tracks if a email error message is active
 let commentError = false;//tracks if comment error message is active 
 
-//entered fields array
+//array to track if all form fileds are filled to requirments
 let fieldArray = [
   {
-    id: "user name",
-    valid: false,
-    name: "",
+   name: false,
+   email: false,
+   comment: false
   }
-]
+];
 
 //on submit click confirm submit || list needed inputs 
-submit.onclick = function(event){
-    console.log("hello");
-    event.preventDefault();
-    // checkName();
+submit.onclick = function(){
+    //event.preventDefault();
+    alert("Comment submitted!")
 }
     
 userName.addEventListener('input', validate);
@@ -33,6 +32,7 @@ function validate(e){
   //user name validation check
   if (e.target.name == "name"){
     if(userName.value.length > 4){
+      fieldArray[0].name = true; //field has valid input
       //add checkmark &#9989;
       document.getElementById("name-icon").innerHTML = `&#9989;`;
       //remove class invalid 
@@ -42,9 +42,10 @@ function validate(e){
         //remove nameWarning created div
         document.getElementById("name-warning").remove();
       }
-      
+      allFieldsCheck();//check if all fields valid
 
     } else {
+      fieldArray[0].name = false;//field has invalid input
       //add x icon &#10060;
       document.getElementById("name-icon").innerHTML = `&#10060;`;
       //add class invalid 
@@ -60,7 +61,7 @@ function validate(e){
         //'afterend': After the targetElement itself. 
         document.getElementById("name-icon").insertAdjacentElement("afterend", nameWarning);
       }
-
+      allFieldsCheck();//check if all fields valid
     }
   }
 
@@ -68,7 +69,7 @@ function validate(e){
   if (e.target.id == "comments"){
     //console.log("comments working", comment.value, comment.value.length);
     if(comment.value.length > 0){
-      console.log("valid");
+        fieldArray[0].comment = true;//field has valid input 
         //add checkmark &#9989;
         document.getElementById("comments-icon").innerHTML = `&#9989;`;
         //add class invalid 
@@ -78,9 +79,10 @@ function validate(e){
         //remove comment warning created div
         document.getElementById("commentWarning").remove();
       }
+      allFieldsCheck();//check if all fields valid
     }
     else {
-      console.log("invalid");
+      fieldArray[0].comment = false;//field has invalid input
       //add x icon &#10060;
       document.getElementById("comments-icon").innerHTML = `&#10060;`;
       //add class invalid 
@@ -97,12 +99,14 @@ function validate(e){
         document.getElementById("comments-icon").insertAdjacentElement("afterend", commentWarning);
       }
     }
+    allFieldsCheck();//check if all fields valid
   }
   
 }
 
 function emailValidate(){
    if (emailRegex.test(email.value)){
+    fieldArray[0].email = true;//field has valid input
     //add checkmark &#9989;
     document.getElementById("email-icon").innerHTML = `&#9989;`;
     //remove class invalid 
@@ -112,7 +116,9 @@ function emailValidate(){
       //remove nameWarning created div
       document.getElementById("email-warning").remove();
     }
+    allFieldsCheck();//check if all fields valid
    } else {
+      fieldArray[0].email = false;//field has invalid input
       //add x icon &#10060;
       document.getElementById("email-icon").innerHTML = `&#10060;`;
       email.classList.add('invalid');
@@ -127,5 +133,17 @@ function emailValidate(){
       //'afterend': After the targetElement itself. 
       document.getElementById("email-icon").insertAdjacentElement("afterend", emailWarning);
     }
+    allFieldsCheck();//check if all fields valid
    }
+}
+
+//remove disabled attribute || re-add disabled attribute to submit btn
+function allFieldsCheck(){
+  if (fieldArray[0].name == true && fieldArray[0].email == true && fieldArray[0].comment == true){
+    //remove disable attribute from submit btn 
+    document.getElementById("submit").removeAttribute("disabled");
+  } else {
+    //add disable attribute to submit btn
+    document.getElementById("submit").setAttribute("disabled", "");
+  }
 }
