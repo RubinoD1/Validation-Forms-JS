@@ -67,7 +67,6 @@ function validate(e){
 
   //comment validation check 
   if (e.target.id == "comments"){
-    //console.log("comments working", comment.value, comment.value.length);
     if(comment.value.length > 0){
         fieldArray[0].comment = true;//field has valid input 
         //add checkmark &#9989;

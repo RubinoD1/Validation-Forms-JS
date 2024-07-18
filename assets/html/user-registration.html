@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/comment-form.css" />
+        <!-- Favicon -->
+</head>
+<body>
+    <form>
+        <fieldset>
+          <legend>User Registration Form</legend>
+          <label>First Name:<br />
+              <input type="text" name="first-name" id="first-name" placeholder="">
+              <span id="first-name-icon"></span>
+          </label>
+          <br />
+          <label>Last Name:<br />
+            <input type="text" name="last-name" id="last-name" placeholder="">
+            <span id="last-name-icon"></span>
+          </label>
+          <br />
+          <label>Email:<br />
+              <input type="email" name="email" id="email" placeholder="email@example.com" minlength="3" maxlength="64"/>
+              <span id="email-icon"></span>
+          </label>
+          <br />
+          <br />
+          <label>Username:<br />
+            <input type="text" name="username" id="username" placeholder="">
+            <span id="username-icon"></span>
+          </label>
+          <br />
+          <label>Password:<br />
+            <input type="password" name="password" id="password">
+            <span id="password-icon"></span>
+          </label>
+          <br />
+          <label>Re-type Password:<br />
+            <input type="password" name="repeat-password" id="repeat-password">
+            <span id="repeat-password-icon"></span>
+          </label>
+          <br />
+
+          <!-- mailing list signup checkbox -->
+          <label>Subscribe to our mailing list<br /> 
+            <input type="checkbox" name="mail" id="mailing-list" value="signup">
+            signup
+          <br />
+          <input type="submit" value="Submit" id="submit" disabled>
+        </fieldset>
+      </form>
+
+    <!-- footer with link to home page -->
+    <br />
+    <footer>
+        <a href="/index.html">
+            <button>Home Page</button>
+         </a>
+    </footer>
+
+    <!-- js file -->
+    <script src="../js/user-registration.js"></script>
+</body>
+</html>
