@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Registration</title>
         <!-- CSS -->
-        <link rel="stylesheet" href="../css/comment-form.css" />
+        <link rel="stylesheet" href="../css/user-registration.css" />
         <!-- Favicon -->
 </head>
 <body>
@@ -27,27 +27,29 @@
               <span id="email-icon"></span>
           </label>
           <br />
-          <br />
           <label>Username:<br />
             <input type="text" name="username" id="username" placeholder="">
             <span id="username-icon"></span>
           </label>
           <br />
+          <br />
           <label>Password:<br />
             <input type="password" name="password" id="password">
-            <span id="password-icon"></span>
+            <span id="password-icon"></span><br />
+            <input type="checkbox" id="show-password" class="checkbox">Show Password
           </label>
           <br />
           <label>Re-type Password:<br />
             <input type="password" name="repeat-password" id="repeat-password">
-            <span id="repeat-password-icon"></span>
+            <span id="repeat-password-icon"></span><br />
+            <input type="checkbox" id="show-repeat-password" class="checkbox">Show Password
           </label>
           <br />
 
           <!-- mailing list signup checkbox -->
           <label>Subscribe to our mailing list<br /> 
-            <input type="checkbox" name="mail" id="mailing-list" value="signup">
-            signup
+            <input type="checkbox" name="mail" id="mailing-list" value="signup" class="checkbox">
+            Signup
           <br />
           <input type="submit" value="Submit" id="submit" disabled>
         </fieldset>
