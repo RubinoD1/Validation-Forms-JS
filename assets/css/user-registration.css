@@ -5,3 +5,11 @@
 .checkbox {
     margin-bottom: 15px;
 }
+
+.warning-pass {
+    color: #2fbf35;
+}
+
+.warning-invalid {
+    color: #ff0000;
+}

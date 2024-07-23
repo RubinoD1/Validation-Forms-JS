@@ -58,22 +58,78 @@ function passwordValidate (){
         passError = true;
         //password req message div
         const passWarning = document.createElement("div");
-        passWarning.innerHTML = `
-        At least 8 characters <br/>
-        Maximum of 16 characters  <br/>
-        Contains one uppercase letter  <br/>
-        Contains one number  <br/>
-        Contains one special character (@, #, $, etc.)  <br/>
-        Contains no spaces
-        `;
-        passWarning.style.color = 'red';
+        // passWarning.innerHTML = `
+        // At least 8 characters <br/>
+        // Maximum of 16 characters  <br/>
+        // Contains one uppercase letter  <br/>
+        // Contains one number  <br/>
+        // Contains one special character (@, #, $, etc.)  <br/>
+        // Contains no spaces
+        // `;
+        // passWarning.style.color = 'red';
         passWarning.setAttribute("id", "passWarning");
         //'afterend': After the targetElement itself. 
         document.getElementById("password-icon").insertAdjacentElement("afterend", passWarning);
       }
       //run dynamic passWarning message 
-
+      dynamicPassError();
     }
 }
 
-//re-type pass function
+//re-type pass function -- use dynamic warning updates  
+  // if pass not "" and is valid check if match 
+function rePassValidate(){
+  let pass = password.value;
+  //switch statements pass not empty and valid, pass empty check pass, pass empty check invalid
+   // or have disabled unless pass valid
+  if (pass != ""){
+    
+    console.log(pass, " not empty");
+  } else {
+    console.log("Empty pass");
+  }
+}
+
+//dynamic invalid password message
+  //need to differenciate between password and re-type if both need this message 
+    // or just have re-type disabled untill needed
+function dynamicPassError(){
+  let valid = `&#9989;`;
+  let invalid = `&#10060;`;
+
+  const upperCaseLetters = /(?=.*[A-Z])/g
+  let uc = document.getElementById("uppercase-child");
+  if (upperCaseLetters.test(password.value) == true){
+    if (uc == null){//check if id exists
+      //create child element 
+      uppercaseChild = document.createElement("p");
+      uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
+      uppercaseChild.setAttribute("id", "uppercase-child");
+      uppercaseChild.setAttribute("class", "warning-pass");//add class valid
+      document.getElementById("passWarning").appendChild(uppercaseChild); //append to parent 
+    }
+    //remove invalid class 
+    uppercaseChild.classList.remove("warning-invalid");
+    //add valid class
+    uppercaseChild.classList.add("warning-pass");
+    uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
+  }else {
+    if (uc == null){//if child with id exists check
+        //create child element 
+        uppercaseChild = document.createElement("p");
+        uppercaseChild.innerHTML = `${invalid}` + ' Contains one uppercase letter';
+        uppercaseChild.setAttribute("id", "uppercase-child");//add id uppercase-child
+        uppercaseChild.setAttribute("class", "warning-pass");//add class valid
+        document.getElementById("passWarning").appendChild(uppercaseChild);//append to parent 
+    }
+    //remove valid class 
+    uppercaseChild.classList.remove("warning-pass");
+    //add invalid class
+    uppercaseChild.classList.add("warning-invalid");
+    uppercaseChild.innerHTML = `${invalid}` + ' Contains one uppercase letter';
+  }
+
+}
+
+
+console.log(document.getElementById("test"));
