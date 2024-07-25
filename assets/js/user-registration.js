@@ -98,7 +98,6 @@ function dynamicPassError(){
   let invalid = `&#10060;`;
   
 // At least 8 characters min check 
-    //console.log(password.value.length);
   if (document.getElementById("minPass-child") == null){  //if child element dosen't exist create element
     //create child element 
     minPassChild = document.createElement("p");
@@ -108,7 +107,7 @@ function dynamicPassError(){
     document.getElementById("passWarning").appendChild(minPassChild); //append to parent 
   }
 
-  if (password.value.length >= 8){
+  if (password.value.length >= 8){//pass must be at least 8 characters to be valid
     //remove invalid class 
     minPassChild.classList.remove("warning-invalid");
     //add valid class
@@ -122,9 +121,29 @@ function dynamicPassError(){
     minPassChild.innerHTML = `${invalid}` + ' At least 8 characters';
   }
 
+  //password max 16 characters check 
+  if (document.getElementById("maxPass-child") == null){  //if child element dosen't exist create element
+    //create child element 
+    maxPassChild = document.createElement("p");
+    maxPassChild.innerHTML = `${valid}` + ' Maximum of 16 characters';
+    maxPassChild.setAttribute("id", "maxPass-child");
+    maxPassChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(maxPassChild); //append to parent 
+  }
 
-
-
+  if (password.value.length <= 16){//password must be a max of 16 characters to be valid 
+    //remove invalid class 
+    maxPassChild.classList.remove("warning-invalid");
+    //add valid class
+    maxPassChild.classList.add("warning-pass");
+    maxPassChild.innerHTML = `${valid}` + ' Maximum of 16 characters';
+  } else {
+    //remove valid class
+    maxPassChild.classList.remove("warning-pass");
+    //add invalid class 
+    maxPassChild.classList.add("warning-invalid");
+    maxPassChild.innerHTML = `${invalid}` + ' Maximum of 16 characters';
+  }
 
   //uppercase check
   const upperCaseLetters = /(?=.*[A-Z])/g
@@ -151,5 +170,8 @@ function dynamicPassError(){
     uppercaseChild.classList.add("warning-invalid");
     uppercaseChild.innerHTML = `${invalid}` + ' Contains one uppercase letter';
   }
+
+  // Contains at least one number
+  
 
 }
