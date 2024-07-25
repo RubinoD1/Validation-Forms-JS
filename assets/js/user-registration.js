@@ -146,7 +146,7 @@ function dynamicPassError(){
   }
 
   //uppercase check
-  const upperCaseLetters = /(?=.*[A-Z])/g
+  const upperCaseLetters = /(?=.*[A-Z])/g;
   //if child element dosen't exist create element
   if (document.getElementById("uppercase-child") == null){//check if id exists
     //create child element 
@@ -172,6 +172,31 @@ function dynamicPassError(){
   }
 
   // Contains at least one number
-  
+  const numbers = /(?=.*[0-9])/g;
+  if (document.getElementById("number-child") == null){//check if id exists
+    //create child element 
+    numberChild = document.createElement("p");
+    numberChild.innerHTML = `${valid}` + ' Contains one number';
+    numberChild.setAttribute("id", "number-child");
+    numberChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(numberChild); //append to parent 
+  }
+  //number check for password value 
+  if (numbers.test(password.value) == true){
+    //remove invalid class 
+    numberChild.classList.remove("warning-invalid");
+    //add valid class 
+    numberChild.classList.add("warning-pass");
+    numberChild.innerHTML = `${valid}` + ' Contains one number';
+  }else {
+    //remove valid class
+    numberChild.classList.remove("warning-pass");
+    //add invalid class 
+    numberChild.classList.add("warning-invalid");
+    numberChild.innerHTML = `${invalid}` + ' Contains one number';
+  }
 
+  //special characters check 
+  const special = /(?=.*\W)/g;
+  
 }
