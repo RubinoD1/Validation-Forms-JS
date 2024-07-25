@@ -97,10 +97,30 @@ function dynamicPassError(){
   let valid = `&#9989;`;
   let invalid = `&#10060;`;
   
-  // At least 8 characters min check 
+// At least 8 characters min check 
     //console.log(password.value.length);
+  if (document.getElementById("minPass-child") == null){  //if child element dosen't exist create element
+    //create child element 
+    minPassChild = document.createElement("p");
+    minPassChild.innerHTML = `${valid}` + ' At least 8 characters';
+    minPassChild.setAttribute("id", "minPass-child");
+    minPassChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(minPassChild); //append to parent 
+  }
 
-
+  if (password.value.length >= 8){
+    //remove invalid class 
+    minPassChild.classList.remove("warning-invalid");
+    //add valid class
+    minPassChild.classList.add("warning-pass");
+    minPassChild.innerHTML = `${valid}` + ' At least 8 characters';
+  } else {
+    //remove valid class
+    minPassChild.classList.remove("warning-pass");
+    //add invalid class 
+    minPassChild.classList.add("warning-invalid");
+    minPassChild.innerHTML = `${invalid}` + ' At least 8 characters';
+  }
 
 
 
@@ -108,9 +128,8 @@ function dynamicPassError(){
 
   //uppercase check
   const upperCaseLetters = /(?=.*[A-Z])/g
-  let uc = document.getElementById("uppercase-child");
   //if child element dosen't exist create element
-  if (uc == null){//check if id exists
+  if (document.getElementById("uppercase-child") == null){//check if id exists
     //create child element 
     uppercaseChild = document.createElement("p");
     uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
