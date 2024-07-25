@@ -96,32 +96,36 @@ function rePassValidate(){
 function dynamicPassError(){
   let valid = `&#9989;`;
   let invalid = `&#10060;`;
+  
+  // At least 8 characters min check 
+    //console.log(password.value.length);
 
+
+
+
+
+
+
+  //uppercase check
   const upperCaseLetters = /(?=.*[A-Z])/g
   let uc = document.getElementById("uppercase-child");
+  //if child element dosen't exist create element
+  if (uc == null){//check if id exists
+    //create child element 
+    uppercaseChild = document.createElement("p");
+    uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
+    uppercaseChild.setAttribute("id", "uppercase-child");
+    uppercaseChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(uppercaseChild); //append to parent 
+  }
+  //uppercase letter check for password value
   if (upperCaseLetters.test(password.value) == true){
-    if (uc == null){//check if id exists
-      //create child element 
-      uppercaseChild = document.createElement("p");
-      uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
-      uppercaseChild.setAttribute("id", "uppercase-child");
-      uppercaseChild.setAttribute("class", "warning-pass");//add class valid
-      document.getElementById("passWarning").appendChild(uppercaseChild); //append to parent 
-    }
     //remove invalid class 
     uppercaseChild.classList.remove("warning-invalid");
     //add valid class
     uppercaseChild.classList.add("warning-pass");
     uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
   }else {
-    if (uc == null){//if child with id exists check
-        //create child element 
-        uppercaseChild = document.createElement("p");
-        uppercaseChild.innerHTML = `${invalid}` + ' Contains one uppercase letter';
-        uppercaseChild.setAttribute("id", "uppercase-child");//add id uppercase-child
-        uppercaseChild.setAttribute("class", "warning-pass");//add class valid
-        document.getElementById("passWarning").appendChild(uppercaseChild);//append to parent 
-    }
     //remove valid class 
     uppercaseChild.classList.remove("warning-pass");
     //add invalid class
@@ -130,6 +134,3 @@ function dynamicPassError(){
   }
 
 }
-
-
-console.log(document.getElementById("test"));
