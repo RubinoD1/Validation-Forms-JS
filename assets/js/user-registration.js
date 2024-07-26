@@ -58,20 +58,11 @@ function passwordValidate (){
         passError = true;
         //password req message div
         const passWarning = document.createElement("div");
-        // passWarning.innerHTML = `
-        // At least 8 characters <br/>
-        // Maximum of 16 characters  <br/>
-        // Contains one uppercase letter  <br/>
-        // Contains one number  <br/>
-        // Contains one special character (@, #, $, etc.)  <br/>
-        // Contains no spaces
-        // `;
-        // passWarning.style.color = 'red';
         passWarning.setAttribute("id", "passWarning");
         //'afterend': After the targetElement itself. 
         document.getElementById("password-icon").insertAdjacentElement("afterend", passWarning);
       }
-      //run dynamic passWarning message 
+      //call dynamic passWarning message function
       dynamicPassError();
     }
 }
@@ -221,8 +212,29 @@ function dynamicPassError(){
     specialChild.innerHTML = `${invalid}` + ' Contains one special character (@, #, $, etc.)';
   }
 
-  //no spaces check (?!.* )
-  const noSpaces = /(?!.* )/g;
-
+  //no spaces check ?!.* 
+  const noSpaces = /(?=.*\s)/g;
+  if (document.getElementById("space-child") == null){//check if id exists
+    //create child element 
+    spaceChild = document.createElement("p");
+    spaceChild.innerHTML = `${valid}` + ' Contains no spaces';
+    spaceChild.setAttribute("id", "space-child");
+    spaceChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(spaceChild); //append to parent 
+  }
+  // console.log(noSpaces.test(password.value));
+  if (noSpaces.test(password.value) == false){
+    //remove invalid class 
+    spaceChild.classList.remove("warning-invalid");
+    //add valid class
+    spaceChild.classList.add("warning-pass");
+    spaceChild.innerHTML = `${valid}` + ' Contains no spaces';
+  }else {
+    //remove valid class 
+    spaceChild.classList.remove("warning-valid");
+    //add invalid class 
+    spaceChild.classList.add("warning-invalid");
+    spaceChild.innerHTML = `${invalid}` + ' Contains no spaces';
+  }
 
 }
