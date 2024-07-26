@@ -198,5 +198,31 @@ function dynamicPassError(){
 
   //special characters check 
   const special = /(?=.*\W)/g;
-  
+  if (document.getElementById("special-child") == null){//check if id exists
+    //create child element 
+    specialChild = document.createElement("p");
+    specialChild.innerHTML = `${valid}` + ' Contains one special character (@, #, $, etc.)';
+    specialChild.setAttribute("id", "special-child");
+    specialChild.setAttribute("class", "warning-pass");//add class valid
+    document.getElementById("passWarning").appendChild(specialChild); //append to parent 
+  }
+
+  if (special.test(password.value) == true){
+    //remove invalid class 
+    specialChild.classList.remove("warning-invalid");
+    //add valid class
+    specialChild.classList.add("warning-pass");
+    specialChild.innerHTML = `${valid}` + ' Contains one special character (@, #, $, etc.)';
+  }else {
+    //remove valid class
+    specialChild.classList.remove("warning-invalid");
+    //add invalid class 
+    specialChild.classList.add("warning-pass");
+    specialChild.innerHTML = `${invalid}` + ' Contains one special character (@, #, $, etc.)';
+  }
+
+  //no spaces check (?!.* )
+  const noSpaces = /(?!.* )/g;
+
+
 }
