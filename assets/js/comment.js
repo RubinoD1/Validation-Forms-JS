@@ -54,7 +54,7 @@ function validate(e){
         nameError = true;
         //input needed message -- red font below input box 
         const nameWarning = document.createElement("div");
-        nameWarning.innerHTML = 'Name must be atleast 5 characters in length'
+        nameWarning.innerHTML = 'Name must be at least 5 characters in length'
         nameWarning.style.color = 'red';
         //add id to nameWarning
         nameWarning.setAttribute("id", "name-warning");
@@ -90,7 +90,7 @@ function validate(e){
         commentError = true;
         //input needed message -- red font below input box 
         const commentWarning = document.createElement("div");
-        commentWarning.innerHTML = 'Comment must be atleast 1 character in length'
+        commentWarning.innerHTML = 'Comment must be at least 1 character in length'
         commentWarning.style.color = 'red';
         //add id to commentWarning
         commentWarning.setAttribute("id", "commentWarning");

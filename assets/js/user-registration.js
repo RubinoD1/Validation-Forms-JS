@@ -1,18 +1,16 @@
 const password = document.getElementById("password");
 const repeatPassword = document.getElementById("repeat-password");
+const email = document.getElementById("email");
+const userName = document.getElementById("username");
 
-//array to track if all form fileds are filled to requirments
-let fieldArray = [
-    {
-     firstName: false,
-     lastName: false,
-     email: false,
-     username: false,
-     password: false,
-     repeatPass:false,
-     mail: false
-    }
-  ];
+//passRegex: contains number, uppercase letter, special character, no space and is between 8 and 16 characters in length.
+const passRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//email reg expression validation
+
+let passError = false;//tracks if a password error message is active
+let rePassError = false;//tracks if repeat password error message is active
+let emailError = false;//tracks if a email error message is active
+let usernameError = false;//tracks if username error message is active 
 
 //event listener - show / hide password text for first password entry 
 document.getElementById("show-password").onclick = () =>{
@@ -25,6 +23,11 @@ document.getElementById("show-repeat-password").onclick = () =>{
     passwordToggle(target);
 }
 
+password.addEventListener('input', passwordValidate);//password input event listener
+repeatPassword.addEventListener('input', rePassValidate);//repeat password event listener 
+email.addEventListener('input', emailValidate);//email input event listener
+userName.addEventListener('input', usernameValidate);//username event listener
+
 //toggle password text based on checkbox clicked
 function passwordToggle(target){
  if (target.type === "password"){
@@ -33,16 +36,6 @@ function passwordToggle(target){
     target.type = "password";
   }
 }
-
-//password validation check: contains number, uppercase letter, special character, no space and is between 8 and 16 characters in length.
-const passRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
-let passError = false;//tracks if a password error message is active
-let rePassError = false;//tracks if repeat password error message is active
-
-//password input event listener
-password.addEventListener('input', passwordValidate);
-//repeat password event listener 
-repeatPassword.addEventListener('input', rePassValidate);
 
 function passwordValidate (){
     if (passRegex.test(password.value)){
@@ -83,11 +76,8 @@ function rePassValidate(){
   if (repeatPassword.value != ""){
     console.log(repeatPassword.value, " not empty");
     if (repeatPassword.value === password.value){
-      //console.log("Passwords Match!");
-      //remove class invalid  
-      repeatPassword.classList.remove('invalid');
+      repeatPassword.classList.remove('invalid'); //remove class invalid  
       document.getElementById("repeat-password-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
-      //set validity to true 
       fieldArray[0].repeatPass = true;//field has valid input
       //passwords match message 
       if(rePassError === true){
@@ -110,9 +100,7 @@ function rePassValidate(){
         document.getElementById("repeat-password-icon").insertAdjacentElement("afterend", rePassWarning);
       }
     }
-  } else {
-    console.log("Empty pass");
-  }
+  } 
 }
 
 //dynamic invalid password message
@@ -262,5 +250,88 @@ function dynamicPassError(){
     spaceChild.classList.add("warning-invalid");
     spaceChild.innerHTML = `${invalid}` + ' Contains no spaces';
   }
-
 }
+
+//email validate 
+function emailValidate(){
+  if (emailRegex.test(email.value)){
+   fieldArray[0].email = true;//field has valid input
+   //add checkmark &#9989;
+   document.getElementById("email-icon").innerHTML = `&#9989;`;
+   //remove class invalid 
+   email.classList.remove('invalid');
+   if (emailError === true){
+     emailError = false;
+     //remove nameWarning created div
+     document.getElementById("email-warning").remove();
+   }
+   //check if all fields valid
+   //allFieldsCheck();
+  } else {
+     fieldArray[0].email = false;//field has invalid input
+     //add x icon &#10060;
+     document.getElementById("email-icon").innerHTML = `&#10060;`;
+     email.classList.add('invalid');
+   if (emailError === false){
+     emailError = true;
+     //input needed message -- red font below input box 
+     const emailWarning = document.createElement("div");
+     emailWarning.innerHTML = 'Invalid email'
+     emailWarning.style.color = 'red';
+     //add id to nameWarning
+     emailWarning.setAttribute("id", "email-warning");
+     //'afterend': After the targetElement itself. 
+     document.getElementById("email-icon").insertAdjacentElement("afterend", emailWarning);
+   }
+   //allFieldsCheck();//check if all fields valid
+  }
+}
+
+//username validate 
+function usernameValidate(){
+   if (userName.value.length > 4){//username is atleast 5 characters in length
+    fieldArray[0].username = true; //field has valid input
+    document.getElementById("username-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+    userName.classList.remove('invalid'); //remove class invalid 
+    if (usernameError === true){
+      usernameError = false;
+      document.getElementById("username-warning").remove();//remeove username-warning div
+    }
+    //call submit btn check 
+    //allFieldsCheck();
+   }else {
+    fieldArray[0].username = false; //field has invalid input
+    document.getElementById("username-icon").innerHTML = `&#10060;`;//add x icon &#10060;
+    userName.classList.add('invalid');//add class invalid
+    if (usernameError === false){
+       usernameError = true;
+       const usernameWarning = document.createElement("div");
+       usernameWarning.innerHTML = 'Username must be at least 5 characters in length'
+       usernameWarning.style.color = 'red';
+       usernameWarning.setAttribute("id", "username-warning");//add id to nameWarning
+       //'afterend': After the targetElement itself. 
+       document.getElementById("username-icon").insertAdjacentElement("afterend", usernameWarning);
+    }
+   }
+}
+
+
+
+
+
+
+
+
+
+//array to track if all form fileds are filled to requirments
+let fieldArray = [
+  {
+   firstName: false,
+   lastName: false,
+   email: false,
+   username: false,
+   password: false,
+   repeatPass:false,
+   mail: false
+  }
+];
