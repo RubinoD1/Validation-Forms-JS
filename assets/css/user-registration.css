@@ -7,9 +7,13 @@
 }
 
 .warning-pass {
-    color: #2fbf35;
+    color: #309f35;
 }
 
 .warning-invalid {
     color: #ff0000;
+}
+/* remove gaps between p elements */
+p {
+    margin-bottom: -10px;
 }

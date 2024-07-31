@@ -9,6 +9,7 @@ let fieldArray = [
      email: false,
      username: false,
      password: false,
+     repeatPass:false,
      mail: false
     }
   ];
@@ -36,9 +37,12 @@ function passwordToggle(target){
 //password validation check: contains number, uppercase letter, special character, no space and is between 8 and 16 characters in length.
 const passRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
 let passError = false;//tracks if a password error message is active
+let rePassError = false;//tracks if repeat password error message is active
 
 //password input event listener
 password.addEventListener('input', passwordValidate);
+//repeat password event listener 
+repeatPassword.addEventListener('input', rePassValidate);
 
 function passwordValidate (){
     if (passRegex.test(password.value)){
@@ -50,6 +54,10 @@ function passwordValidate (){
         //remove passWarning created div
         document.getElementById("passWarning").remove();
       }
+      //remove disable attribute from repeat-password input  
+      document.getElementById("repeat-password").removeAttribute("disabled");
+      //call repeat password function rePassValidate to check password match 
+      rePassValidate();
     } else {
       fieldArray[0].password = false; //field has invalid input
       document.getElementById("password-icon").innerHTML = `&#10060;`; //add x icon &#10060;
@@ -62,28 +70,52 @@ function passwordValidate (){
         //'afterend': After the targetElement itself. 
         document.getElementById("password-icon").insertAdjacentElement("afterend", passWarning);
       }
+      //add disable attribute to repeat-password input
+      document.getElementById("repeat-password").setAttribute("disabled", "");
       //call dynamic passWarning message function
       dynamicPassError();
     }
 }
 
-//re-type pass function -- use dynamic warning updates  
+//re-type pass function 
   // if pass not "" and is valid check if match 
 function rePassValidate(){
-  let pass = password.value;
-  //switch statements pass not empty and valid, pass empty check pass, pass empty check invalid
-   // or have disabled unless pass valid
-  if (pass != ""){
-    
-    console.log(pass, " not empty");
+  if (repeatPassword.value != ""){
+    console.log(repeatPassword.value, " not empty");
+    if (repeatPassword.value === password.value){
+      //console.log("Passwords Match!");
+      //remove class invalid  
+      repeatPassword.classList.remove('invalid');
+      document.getElementById("repeat-password-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+      //set validity to true 
+      fieldArray[0].repeatPass = true;//field has valid input
+      //passwords match message 
+      if(rePassError === true){
+        rePassError = false;
+        document.getElementById("repeat-warning").remove();//remove repeat-warning created div
+      }
+      //call submit btn check 
+      
+    }else {
+      fieldArray[0].repeatPass = false;//field has invalid input
+      document.getElementById("repeat-password-icon").innerHTML = `&#10060;`; //add x icon &#10060;
+      repeatPassword.classList.add('invalid');
+      //create error message div
+      if(rePassError === false){
+        rePassError = true;
+        const rePassWarning = document.createElement("div");//create div
+        rePassWarning.innerHTML = 'Passwords do not match'
+        rePassWarning.style.color = 'red';
+        rePassWarning.setAttribute("id", "repeat-warning");//set id
+        document.getElementById("repeat-password-icon").insertAdjacentElement("afterend", rePassWarning);
+      }
+    }
   } else {
     console.log("Empty pass");
   }
 }
 
 //dynamic invalid password message
-  //need to differenciate between password and re-type if both need this message 
-    // or just have re-type disabled untill needed
 function dynamicPassError(){
   let valid = `&#9989;`;
   let invalid = `&#10060;`;
@@ -92,7 +124,6 @@ function dynamicPassError(){
   if (document.getElementById("minPass-child") == null){  //if child element dosen't exist create element
     //create child element 
     minPassChild = document.createElement("p");
-    minPassChild.innerHTML = `${valid}` + ' At least 8 characters';
     minPassChild.setAttribute("id", "minPass-child");
     minPassChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(minPassChild); //append to parent 
@@ -116,7 +147,6 @@ function dynamicPassError(){
   if (document.getElementById("maxPass-child") == null){  //if child element dosen't exist create element
     //create child element 
     maxPassChild = document.createElement("p");
-    maxPassChild.innerHTML = `${valid}` + ' Maximum of 16 characters';
     maxPassChild.setAttribute("id", "maxPass-child");
     maxPassChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(maxPassChild); //append to parent 
@@ -142,7 +172,6 @@ function dynamicPassError(){
   if (document.getElementById("uppercase-child") == null){//check if id exists
     //create child element 
     uppercaseChild = document.createElement("p");
-    uppercaseChild.innerHTML = `${valid}` + ' Contains one uppercase letter';
     uppercaseChild.setAttribute("id", "uppercase-child");
     uppercaseChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(uppercaseChild); //append to parent 
@@ -167,7 +196,6 @@ function dynamicPassError(){
   if (document.getElementById("number-child") == null){//check if id exists
     //create child element 
     numberChild = document.createElement("p");
-    numberChild.innerHTML = `${valid}` + ' Contains one number';
     numberChild.setAttribute("id", "number-child");
     numberChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(numberChild); //append to parent 
@@ -192,7 +220,6 @@ function dynamicPassError(){
   if (document.getElementById("special-child") == null){//check if id exists
     //create child element 
     specialChild = document.createElement("p");
-    specialChild.innerHTML = `${valid}` + ' Contains one special character (@, #, $, etc.)';
     specialChild.setAttribute("id", "special-child");
     specialChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(specialChild); //append to parent 
@@ -208,7 +235,7 @@ function dynamicPassError(){
     //remove valid class
     specialChild.classList.remove("warning-invalid");
     //add invalid class 
-    specialChild.classList.add("warning-pass");
+    specialChild.classList.add("warning-invalid");
     specialChild.innerHTML = `${invalid}` + ' Contains one special character (@, #, $, etc.)';
   }
 
@@ -217,12 +244,11 @@ function dynamicPassError(){
   if (document.getElementById("space-child") == null){//check if id exists
     //create child element 
     spaceChild = document.createElement("p");
-    spaceChild.innerHTML = `${valid}` + ' Contains no spaces';
     spaceChild.setAttribute("id", "space-child");
     spaceChild.setAttribute("class", "warning-pass");//add class valid
     document.getElementById("passWarning").appendChild(spaceChild); //append to parent 
   }
-  // console.log(noSpaces.test(password.value));
+
   if (noSpaces.test(password.value) == false){
     //remove invalid class 
     spaceChild.classList.remove("warning-invalid");
