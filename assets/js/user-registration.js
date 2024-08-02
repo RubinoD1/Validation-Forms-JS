@@ -2,6 +2,8 @@ const password = document.getElementById("password");
 const repeatPassword = document.getElementById("repeat-password");
 const email = document.getElementById("email");
 const userName = document.getElementById("username");
+const firstName = document.getElementById("first-name");
+const lastName = document.getElementById("last-name");
 
 //passRegex: contains number, uppercase letter, special character, no space and is between 8 and 16 characters in length.
 const passRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
@@ -11,6 +13,7 @@ let passError = false;//tracks if a password error message is active
 let rePassError = false;//tracks if repeat password error message is active
 let emailError = false;//tracks if a email error message is active
 let usernameError = false;//tracks if username error message is active 
+let firstNameError= false;
 
 //event listener - show / hide password text for first password entry 
 document.getElementById("show-password").onclick = () =>{
@@ -27,6 +30,8 @@ password.addEventListener('input', passwordValidate);//password input event list
 repeatPassword.addEventListener('input', rePassValidate);//repeat password event listener 
 email.addEventListener('input', emailValidate);//email input event listener
 userName.addEventListener('input', usernameValidate);//username event listener
+firstName.addEventListener('input', nameValidate);//first name event listener
+lastName.addEventListener('input', nameValidate);//last name event listener
 
 //toggle password text based on checkbox clicked
 function passwordToggle(target){
@@ -315,12 +320,42 @@ function usernameValidate(){
    }
 }
 
+//first and last name validation - min 1 character in length
+function nameValidate(e){
+  if (e.target.id == "first-name"){
+    if (!firstName.value.trim().length == false){//check that value is not just spaces 
+      fieldArray[0].firstName = true; //field has valid input
+      document.getElementById("first-name-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+      firstName.classList.remove('invalid'); //remove class invalid 
+      if (firstNameError == true){
+        firstNameError = false;
+        document.getElementById("first-name-warning").remove();//remove first-name-warning created div
+      }
+      //run submit btn check 
+      
+    }else{
+      fieldArray[0].firstName = false;//field has invalid input
+      document.getElementById("first-name-icon").innerHTML = `&#10060;`;//add x icon &#10060;
+      firstName.classList.add('invalid');//add class invalid 
+      if (firstNameError == false){
+        firstNameError = true; 
+         const firstNameWarning = document.createElement("div");
+         firstNameWarning.innerHTML = 'Name must be at least 1 character in length'
+         firstNameWarning.style.color = 'red';
+         firstNameWarning.setAttribute("id", "first-name-warning");
+         document.getElementById("first-name-icon").insertAdjacentElement("afterend", firstNameWarning);
+      }
+    }
+  }
 
 
-
-
-
-
+  
+  
+  if (e.target.id == "last-name"){
+    console.log("last name");
+  }
+  
+}
 
 
 //array to track if all form fileds are filled to requirments
