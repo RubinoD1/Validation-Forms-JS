@@ -13,7 +13,8 @@ let passError = false;//tracks if a password error message is active
 let rePassError = false;//tracks if repeat password error message is active
 let emailError = false;//tracks if a email error message is active
 let usernameError = false;//tracks if username error message is active 
-let firstNameError= false;
+let firstNameError= false;//tracks if first name error message is active
+let lastNameError = false;//tracks if last name error message is active
 
 //event listener - show / hide password text for first password entry 
 document.getElementById("show-password").onclick = () =>{
@@ -339,22 +340,40 @@ function nameValidate(e){
       firstName.classList.add('invalid');//add class invalid 
       if (firstNameError == false){
         firstNameError = true; 
-         const firstNameWarning = document.createElement("div");
-         firstNameWarning.innerHTML = 'Name must be at least 1 character in length'
-         firstNameWarning.style.color = 'red';
-         firstNameWarning.setAttribute("id", "first-name-warning");
-         document.getElementById("first-name-icon").insertAdjacentElement("afterend", firstNameWarning);
+        const firstNameWarning = document.createElement("div");
+        firstNameWarning.innerHTML = 'Name must be at least 1 character in length'
+        firstNameWarning.style.color = 'red';
+        firstNameWarning.setAttribute("id", "first-name-warning");
+        document.getElementById("first-name-icon").insertAdjacentElement("afterend", firstNameWarning);
       }
     }
   }
 
-
-  
-  
   if (e.target.id == "last-name"){
-    console.log("last name");
-  }
-  
+    if (!lastName.value.trim().length == false){
+      fieldArray[0].lastName = true; //field has valid input
+      document.getElementById("last-name-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+      lastName.classList.remove('invalid'); //remove class invalid 
+      if (lastNameError == true){
+        lastNameError = false;
+        document.getElementById("last-name-warning").remove();//remove first-name-warning created div
+      }
+      //run submit btn check 
+
+    }else {
+      fieldArray[0].lastName = false;//field has invalid input
+      document.getElementById("last-name-icon").innerHTML = `&#10060;`;//add x icon &#10060;
+      lastName.classList.add('invalid');//add class invalid 
+    if (lastNameError == false){
+      lastNameError = true; 
+      const lastNameWarning = document.createElement("div");
+      lastNameWarning.innerHTML = 'Last name must be at least 1 character in length'
+      lastNameWarning.style.color = 'red';
+      lastNameWarning.setAttribute("id", "last-name-warning");
+      document.getElementById("last-name-icon").insertAdjacentElement("afterend", lastNameWarning);
+     }
+   }
+  }      
 }
 
 
