@@ -45,7 +45,7 @@ function passwordToggle(target){
 
 function passwordValidate (){
     if (passRegex.test(password.value)){
-      fieldArray[0].password = true; //field has valid input
+      fieldArray[4].valid = true; //field has valid input
       document.getElementById("password-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
       password.classList.remove('invalid');
       if (passError === true){
@@ -58,7 +58,7 @@ function passwordValidate (){
       //call repeat password function rePassValidate to check password match 
       rePassValidate();
     } else {
-      fieldArray[0].password = false; //field has invalid input
+      fieldArray[4].valid = false; //field has invalid input
       document.getElementById("password-icon").innerHTML = `&#10060;`; //add x icon &#10060;
       password.classList.add('invalid');
       if (passError === false){
@@ -80,20 +80,19 @@ function passwordValidate (){
   // if pass not "" and is valid check if match 
 function rePassValidate(){
   if (repeatPassword.value != ""){
-    console.log(repeatPassword.value, " not empty");
     if (repeatPassword.value === password.value){
       repeatPassword.classList.remove('invalid'); //remove class invalid  
       document.getElementById("repeat-password-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
-      fieldArray[0].repeatPass = true;//field has valid input
+      fieldArray[5].valid = true;//field has valid input
       //passwords match message 
       if(rePassError === true){
         rePassError = false;
         document.getElementById("repeat-warning").remove();//remove repeat-warning created div
       }
-      //call submit btn check 
-      
+      //call validation check 
+      formValidationCheck();
     }else {
-      fieldArray[0].repeatPass = false;//field has invalid input
+      fieldArray[5].valid = false;//field has invalid input
       document.getElementById("repeat-password-icon").innerHTML = `&#10060;`; //add x icon &#10060;
       repeatPassword.classList.add('invalid');
       //create error message div
@@ -105,6 +104,8 @@ function rePassValidate(){
         rePassWarning.setAttribute("id", "repeat-warning");//set id
         document.getElementById("repeat-password-icon").insertAdjacentElement("afterend", rePassWarning);
       }
+      //call validation check 
+      formValidationCheck();
     }
   } 
 }
@@ -256,12 +257,15 @@ function dynamicPassError(){
     spaceChild.classList.add("warning-invalid");
     spaceChild.innerHTML = `${invalid}` + ' Contains no spaces';
   }
+
+  //call validation check 
+  formValidationCheck();
 }
 
 //email validate 
 function emailValidate(){
   if (emailRegex.test(email.value)){
-   fieldArray[0].email = true;//field has valid input
+   fieldArray[2].valid = true;//field has valid input
    //add checkmark &#9989;
    document.getElementById("email-icon").innerHTML = `&#9989;`;
    //remove class invalid 
@@ -271,10 +275,10 @@ function emailValidate(){
      //remove nameWarning created div
      document.getElementById("email-warning").remove();
    }
-   //check if all fields valid
-   //allFieldsCheck();
+    //check if all fields valid
+    formValidationCheck();
   } else {
-     fieldArray[0].email = false;//field has invalid input
+    fieldArray[2].valid = false;//field has invalid input
      //add x icon &#10060;
      document.getElementById("email-icon").innerHTML = `&#10060;`;
      email.classList.add('invalid');
@@ -289,14 +293,14 @@ function emailValidate(){
      //'afterend': After the targetElement itself. 
      document.getElementById("email-icon").insertAdjacentElement("afterend", emailWarning);
    }
-   //allFieldsCheck();//check if all fields valid
+   formValidationCheck();
   }
 }
 
 //username validate 
 function usernameValidate(){
    if (userName.value.length > 4){//username is atleast 5 characters in length
-    fieldArray[0].username = true; //field has valid input
+    fieldArray[3].valid = true; //field has valid input
     document.getElementById("username-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
     userName.classList.remove('invalid'); //remove class invalid 
     if (usernameError === true){
@@ -304,9 +308,9 @@ function usernameValidate(){
       document.getElementById("username-warning").remove();//remeove username-warning div
     }
     //call submit btn check 
-    //allFieldsCheck();
+    formValidationCheck();
    }else {
-    fieldArray[0].username = false; //field has invalid input
+    fieldArray[3].valid = false; //field has invalid input
     document.getElementById("username-icon").innerHTML = `&#10060;`;//add x icon &#10060;
     userName.classList.add('invalid');//add class invalid
     if (usernameError === false){
@@ -318,6 +322,7 @@ function usernameValidate(){
        //'afterend': After the targetElement itself. 
        document.getElementById("username-icon").insertAdjacentElement("afterend", usernameWarning);
     }
+    formValidationCheck();
    }
 }
 
@@ -325,7 +330,7 @@ function usernameValidate(){
 function nameValidate(e){
   if (e.target.id == "first-name"){
     if (!firstName.value.trim().length == false){//check that value is not just spaces 
-      fieldArray[0].firstName = true; //field has valid input
+      fieldArray[0].valid = true; //field has valid input
       document.getElementById("first-name-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
       firstName.classList.remove('invalid'); //remove class invalid 
       if (firstNameError == true){
@@ -333,9 +338,9 @@ function nameValidate(e){
         document.getElementById("first-name-warning").remove();//remove first-name-warning created div
       }
       //run submit btn check 
-      
+      formValidationCheck();
     }else{
-      fieldArray[0].firstName = false;//field has invalid input
+      ieldArray[0].valid = false;//field has invalid input
       document.getElementById("first-name-icon").innerHTML = `&#10060;`;//add x icon &#10060;
       firstName.classList.add('invalid');//add class invalid 
       if (firstNameError == false){
@@ -346,12 +351,13 @@ function nameValidate(e){
         firstNameWarning.setAttribute("id", "first-name-warning");
         document.getElementById("first-name-icon").insertAdjacentElement("afterend", firstNameWarning);
       }
+      formValidationCheck();
     }
   }
 
   if (e.target.id == "last-name"){
     if (!lastName.value.trim().length == false){
-      fieldArray[0].lastName = true; //field has valid input
+      fieldArray[1].valid = true; //field has valid input
       document.getElementById("last-name-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
       lastName.classList.remove('invalid'); //remove class invalid 
       if (lastNameError == true){
@@ -359,9 +365,9 @@ function nameValidate(e){
         document.getElementById("last-name-warning").remove();//remove first-name-warning created div
       }
       //run submit btn check 
-
+      formValidationCheck();
     }else {
-      fieldArray[0].lastName = false;//field has invalid input
+      fieldArray[1].valid = false;//field has invalid input
       document.getElementById("last-name-icon").innerHTML = `&#10060;`;//add x icon &#10060;
       lastName.classList.add('invalid');//add class invalid 
     if (lastNameError == false){
@@ -373,19 +379,33 @@ function nameValidate(e){
       document.getElementById("last-name-icon").insertAdjacentElement("afterend", lastNameWarning);
      }
    }
+   formValidationCheck();
   }      
 }
 
-
-//array to track if all form fileds are filled to requirments
-let fieldArray = [
-  {
-   firstName: false,
-   lastName: false,
-   email: false,
-   username: false,
-   password: false,
-   repeatPass:false,
-   mail: false
+//submit btn validation check 
+  //all = true to enable 
+function formValidationCheck(){
+  // Check if all 'valid' properties are true
+  const allValid = fieldArray.every(obj => obj.valid === true);
+  if(allValid === true){
+    console.log("all valid");
+    //enable submit btn
+    document.getElementById("submit").removeAttribute("disabled");
+  }else {
+    console.log("failed to pass validation");
+    //disable sumbmit btn 
+    document.getElementById("submit").setAttribute("disabled", "");
   }
-];
+}
+
+let fieldArray = [
+  {id: "firstName", valid: false},//0
+  {id: "lastName", valid: false},//1
+  {id: "email", valid: false},//2
+  {id: "username", valid: false},//3
+  {id: "password", valid: false},//4
+  {id: "repeatPass", valid: false}//5
+]
+
+
