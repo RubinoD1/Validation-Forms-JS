@@ -26,6 +26,10 @@ document.getElementById("show-repeat-password").onclick = () =>{
     target = repeatPassword;
     passwordToggle(target);
 }
+//submit btn alert
+submit.onclick = function(){
+  alert("All user registration fields valid!")
+}
 
 password.addEventListener('input', passwordValidate);//password input event listener
 repeatPassword.addEventListener('input', rePassValidate);//repeat password event listener 
@@ -384,18 +388,13 @@ function nameValidate(e){
 }
 
 //submit btn validation check 
-  //all = true to enable 
 function formValidationCheck(){
   // Check if all 'valid' properties are true
   const allValid = fieldArray.every(obj => obj.valid === true);
   if(allValid === true){
-    console.log("all valid");
-    //enable submit btn
-    document.getElementById("submit").removeAttribute("disabled");
+    document.getElementById("submit").removeAttribute("disabled"); //enable submit btn
   }else {
-    console.log("failed to pass validation");
-    //disable sumbmit btn 
-    document.getElementById("submit").setAttribute("disabled", "");
+   document.getElementById("submit").setAttribute("disabled", ""); //disable sumbmit btn 
   }
 }
 
@@ -406,6 +405,6 @@ let fieldArray = [
   {id: "username", valid: false},//3
   {id: "password", valid: false},//4
   {id: "repeatPass", valid: false}//5
-]
+];
 
 
