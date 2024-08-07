@@ -3,16 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Payment Validation</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/comment-form.css" />
+    <!-- Favicon -->
+
 </head>
 <body>
-    <h1>Hello</h1>
+    <form>
+      <fieldset>
+        <legend>Payment Form</legend>
+        <label>Card Holder Name <br />
+            <input type="text" name="name" id="name" placeholder="John Doe" maxlength="60">
+            <span id="name-icon"></span>
+        </label>
+        <br />
+        <label>Card Number<br />
+            <input type="text" name="card-number" id="name" placeholder="1234 1234 1234 1234" maxlength="16">
+            <span id="name-icon"></span>
+        </label>
+        <br />
+        <br />
+        
+        <label>Expiration Date<br />
+            <!-- Month -->
+            <select name="month" id="month">
+                <option value="January">January</option>
+                <option value="February">February</option>
+                <option value="March">March</option>
+                <option value="April">April</option>
+                <option value="May">May</option>
+                <option value="June">June</option>
+                <option value="July">July</option>
+                <option value="August">August</option>
+                <option value="September">September</option>
+                <option value="October">October</option>
+                <option value="Novemeber">November</option>
+                <option value="December">December</option>
+            </select>
+            <!-- Year -->
+            <select name="year" id="year">
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+            </select>
+            <span id="date-icon"></span>
+        </label>
+        
+        <br />
+        <label>CVV<br />
+            <input type="text" name="cvv" id="cvv" placeholder="123" size="3" maxlength="3">
+            <span id="cvv-icon"></span>
+        </label>
+          
 
+
+        <br />
+        <br />
+        <input type="submit" value="Submit" id="submit" disabled>
+      </fieldset>
+    </form>
+    
+    
+    
+    
+    
+    
     <!-- footer with link to home page -->
+    <br />
     <footer>
         <a href="/index.html">
             <button>Home Page</button>
          </a>
     </footer>
+
+    <!-- js file -->
+    <script src="../js/payment.js"></script>
 </body>
 </html>
