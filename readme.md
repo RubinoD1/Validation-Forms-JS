@@ -4,11 +4,18 @@ A collection of form validation forms.
 
 Client side validation is performed by a web browser, before input is sent to a web server.
 
+## What is Validation Form JS?
+
+
+
+
 ## To-do 
 
 Main Page 
 - Main page media breakpoints working. 
 - Simple style -- no frills minimalist. 
+
+## Form field information
 
 Payment Form 
 - 
@@ -31,12 +38,12 @@ There is a dynamically updating password check that allows the user to see the r
 
 Comment / Post Form 
 - Has three input fields: name, email and comment. 
-- Name field is required to be atleast 5 characters in length. 
+- Name field is required to be at least 5 characters in length with a max length of 30 characters. 
 - Email field is tested for validity using the following regular expression:
 ```
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 ```
-- Comment field is required to be atleat 1 character in length. 
+- Comment field is required to be at leat 1 character in length with a max length of 200 characters. 
 - The submit btn remains disabled unless all fields have their requirements met.
 - The validity of the input fields is dynamically updated as the user interacts with the fields. 
 This is done using both HTML Unicode icons (checkmark (&#9989;) and x (&#10060;)) and also with error messages below each field that is not valid. 

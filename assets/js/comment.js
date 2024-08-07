@@ -9,19 +9,9 @@ let nameError = false;//tracks if a name error message is active
 let emailError = false;//tracks if a email error message is active
 let commentError = false;//tracks if comment error message is active 
 
-//array to track if all form fileds are filled to requirments
-let fieldArray = [
-  {
-   name: false,
-   email: false,
-   comment: false
-  }
-];
-
-//on submit click confirm submit || list needed inputs 
+//on submit click confirm submit 
 submit.onclick = function(){
-    //event.preventDefault();
-    alert("Comment submitted!")
+    alert("Comment submitted!");
 }
     
 userName.addEventListener('input', validate);
@@ -31,33 +21,27 @@ email.addEventListener('input', emailValidate);
 function validate(e){
   //user name validation check
   if (e.target.name == "name"){
-    if(userName.value.length > 4){
-      fieldArray[0].name = true; //field has valid input
-      //add checkmark &#9989;
-      document.getElementById("name-icon").innerHTML = `&#9989;`;
-      //remove class invalid 
-      userName.classList.remove('invalid');
+    if (userName.value.trim().length > 4){//at least 5 characters in length not including empty spaces
+      fieldArray[0].valid = true; //field has valid input
+      document.getElementById("name-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+      userName.classList.remove('invalid'); //remove class invalid 
       if (nameError === true){
         nameError = false;
-        //remove nameWarning created div
-        document.getElementById("name-warning").remove();
+        document.getElementById("name-warning").remove(); //remove nameWarning created div
       }
       allFieldsCheck();//check if all fields valid
 
     } else {
-      fieldArray[0].name = false;//field has invalid input
-      //add x icon &#10060;
-      document.getElementById("name-icon").innerHTML = `&#10060;`;
-      //add class invalid 
-      userName.classList.add('invalid');
+      fieldArray[0].valid = false;//field has invalid input
+      document.getElementById("name-icon").innerHTML = `&#10060;`; //add x icon &#10060;
+      userName.classList.add('invalid');//add class invalid 
       if (nameError === false){
         nameError = true;
         //input needed message -- red font below input box 
         const nameWarning = document.createElement("div");
         nameWarning.innerHTML = 'Name must be at least 5 characters in length'
         nameWarning.style.color = 'red';
-        //add id to nameWarning
-        nameWarning.setAttribute("id", "name-warning");
+        nameWarning.setAttribute("id", "name-warning"); //add id to nameWarning
         //'afterend': After the targetElement itself. 
         document.getElementById("name-icon").insertAdjacentElement("afterend", nameWarning);
       }
@@ -67,59 +51,48 @@ function validate(e){
 
   //comment validation check 
   if (e.target.id == "comments"){
-    if(comment.value.length > 0){
-        fieldArray[0].comment = true;//field has valid input 
-        //add checkmark &#9989;
-        document.getElementById("comments-icon").innerHTML = `&#9989;`;
-        //add class invalid 
-        comment.classList.remove('invalid');
+    if (!comment.value.trim().length == false){//check that value is not just spaces 
+        fieldArray[2].valid = true;//field has valid input 
+        document.getElementById("comments-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+        comment.classList.remove('invalid'); //add class invalid 
       if (commentError === true){
         commentError = false;
-        //remove comment warning created div
-        document.getElementById("commentWarning").remove();
+        document.getElementById("commentWarning").remove(); //remove comment warning created div
       }
       allFieldsCheck();//check if all fields valid
     }
     else {
-      fieldArray[0].comment = false;//field has invalid input
-      //add x icon &#10060;
-      document.getElementById("comments-icon").innerHTML = `&#10060;`;
-      //add class invalid 
-      comment.classList.add('invalid');
-      if (nameError === false){
+      fieldArray[2].valid = false;//field has invalid input
+      document.getElementById("comments-icon").innerHTML = `&#10060;`; //add x icon &#10060;
+      comment.classList.add('invalid');//add class invalid 
+      if (commentError === false){
         commentError = true;
         //input needed message -- red font below input box 
         const commentWarning = document.createElement("div");
         commentWarning.innerHTML = 'Comment must be at least 1 character in length'
         commentWarning.style.color = 'red';
-        //add id to commentWarning
-        commentWarning.setAttribute("id", "commentWarning");
+        commentWarning.setAttribute("id", "commentWarning"); //add id to commentWarning
         //'afterend': After the targetElement itself. 
         document.getElementById("comments-icon").insertAdjacentElement("afterend", commentWarning);
       }
     }
     allFieldsCheck();//check if all fields valid
   }
-  
 }
 
 function emailValidate(){
    if (emailRegex.test(email.value)){
-    fieldArray[0].email = true;//field has valid input
-    //add checkmark &#9989;
-    document.getElementById("email-icon").innerHTML = `&#9989;`;
-    //remove class invalid 
-    email.classList.remove('invalid');
+    fieldArray[1].valid = true;//field has valid input
+    document.getElementById("email-icon").innerHTML = `&#9989;`; //add checkmark &#9989;
+    email.classList.remove('invalid'); //remove class invalid 
     if (emailError === true){
       emailError = false;
-      //remove nameWarning created div
-      document.getElementById("email-warning").remove();
+      document.getElementById("email-warning").remove(); //remove nameWarning created div
     }
     allFieldsCheck();//check if all fields valid
    } else {
-      fieldArray[0].email = false;//field has invalid input
-      //add x icon &#10060;
-      document.getElementById("email-icon").innerHTML = `&#10060;`;
+      fieldArray[1].valid = false;//field has invalid input
+      document.getElementById("email-icon").innerHTML = `&#10060;`; //add x icon &#10060;
       email.classList.add('invalid');
     if (emailError === false){
       emailError = true;
@@ -127,8 +100,7 @@ function emailValidate(){
       const emailWarning = document.createElement("div");
       emailWarning.innerHTML = 'Invalid email'
       emailWarning.style.color = 'red';
-      //add id to nameWarning
-      emailWarning.setAttribute("id", "email-warning");
+      emailWarning.setAttribute("id", "email-warning"); //add id to nameWarning
       //'afterend': After the targetElement itself. 
       document.getElementById("email-icon").insertAdjacentElement("afterend", emailWarning);
     }
@@ -138,11 +110,18 @@ function emailValidate(){
 
 //remove disabled attribute || re-add disabled attribute to submit btn
 function allFieldsCheck(){
-  if (fieldArray[0].name == true && fieldArray[0].email == true && fieldArray[0].comment == true){
-    //remove disable attribute from submit btn 
-    document.getElementById("submit").removeAttribute("disabled");
-  } else {
-    //add disable attribute to submit btn
-    document.getElementById("submit").setAttribute("disabled", "");
+  // Check if all 'valid' properties are true
+  const allValid = fieldArray.every(obj => obj.valid === true);
+  if(allValid === true){
+    document.getElementById("submit").removeAttribute("disabled"); //enable submit btn
+  }else {
+   document.getElementById("submit").setAttribute("disabled", ""); //disable sumbmit btn 
   }
 }
+
+//array to track if all form fileds are valid
+let fieldArray = [
+  {id: "name", valid: false},//0
+  {id: "comment", valid: false},//1
+  {id: "email", valid: false}//2
+];
