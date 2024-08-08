@@ -1,10 +1,11 @@
 const fullName = document.getElementById("name");
+const cvv = document.getElementById("cvv");
 
 let fullNameError = false;//tracks if error message is active 
-
+let cvvError = false;//tracks if cvv error message is active
 
 fullName.addEventListener('input', nameValidate);//full name event listener
-
+cvv.addEventListener('input', cvvValidate);//cvv event listener
 
 //card holder name -- two characters in length with at least one space 
 function nameValidate(){
@@ -34,6 +35,35 @@ function nameValidate(){
     }
 }
 
+//cvv validate - only number and three characters in length 
+function cvvValidate(){
+  const cvvRegex = /^(?=.*[0-9])(?!.*\W)(?!.* )(?!.*[a-z])(?!.*[A-Z])(?!.*_).{3,3}$/;//cvv regex -- only allow numbers and three characters in length 
+  if (cvvRegex.test(cvv.value) == true){
+    fieldArray[2].valid = true; //field has valid input
+    document.getElementById("cvv-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+    cvv.classList.remove('invalid'); //remove class invalid 
+    if (cvvError == true){
+        cvvError = false;
+        document.getElementById("cvv-warning").remove();//remove first-name-warning created div
+      }
+      formValidationCheck();//run submit btn check 
+  }else {
+    fieldArray[2].valid = false;//field has invalid input
+    document.getElementById("cvv-icon").innerHTML = `&#10060;`;//add x icon &#10060;
+    cvv.classList.add('invalid');//add class invalid 
+    if (cvvError == false){
+        cvvError = true; 
+        const cvvWarning = document.createElement("div");
+        cvvWarning.innerHTML = 'Invalid input'
+        cvvWarning.style.color = 'red';
+        cvvWarning.setAttribute("id", "cvv-warning");
+        document.getElementById("cvv-icon").insertAdjacentElement("afterend", cvvWarning);
+      }
+      formValidationCheck();
+  }
+}
+
+//card number validate
 
 
 
@@ -49,10 +79,12 @@ function formValidationCheck(){
 }
 
 let fieldArray = [
-    {id: "firstName", valid: false},//0
+    {id: "fullName", valid: false},//0
     {id: "cardNumber", valid: false},//1
     {id: "cvv", valid: false},//2
     {id: "month", valid: false},//3
     {id: "year", valid: false}//4
   ];
-  
+
+
+
