@@ -344,7 +344,7 @@ function nameValidate(e){
       //run submit btn check 
       formValidationCheck();
     }else{
-      ieldArray[0].valid = false;//field has invalid input
+      fieldArray[0].valid = false;//field has invalid input
       document.getElementById("first-name-icon").innerHTML = `&#10060;`;//add x icon &#10060;
       firstName.classList.add('invalid');//add class invalid 
       if (firstNameError == false){
