@@ -1,6 +1,9 @@
 const fullName = document.getElementById("name");
 const cvv = document.getElementById("cvv");
 const cardNumber = document.getElementById("card-number");
+const year = document.getElementById("year");
+const month = document.getElementById("month");
+
 
 let fullNameError = false;//tracks if error message is active 
 let cvvError = false;//tracks if cvv error message is active
@@ -9,6 +12,33 @@ let cardNumberError = false;//tracks if card number error message is active
 fullName.addEventListener('input', nameValidate);//full name event listener
 cvv.addEventListener('input', cvvValidate);//cvv event listener
 cardNumber.addEventListener('input', cardNumberValidate);//card number event listener
+
+//month validation
+month.addEventListener("click", function(){
+   if (month.value != "month"){//input is not default list value
+     fieldArray[3].valid = true; //field has valid input
+     formValidationCheck();
+   }else{
+     fieldArray[3].valid = false; //field has invalid input
+     formValidationCheck();
+   }
+})
+
+// year validation
+year.addEventListener("click", function(){
+  if (year.value != "year"){//input is not default list value
+    fieldArray[4].valid = true; //field has valid input
+    formValidationCheck();
+  }else{
+    fieldArray[4].valid = false; //field has invalid input
+    formValidationCheck();
+  }
+})
+
+//on submit click confirm submit 
+submit.onclick = function(){
+  alert("All fields valid!");
+}
 
 //card holder name -- two characters in length with at least one space 
 function nameValidate(){
@@ -104,9 +134,6 @@ function cardNumberValidate(){
     formValidationCheck();//run submit btn check 
   }
 }
-
-//month / year validation
-
 
 //submit btn validation check 
 function formValidationCheck(){

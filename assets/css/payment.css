@@ -1,0 +1,7 @@
+.invalid {
+    background-color: #fff6a9;
+}
+/* removes deafult dropdown option on click */
+#month:focus option:first-of-type, #year:focus option:first-of-type {
+    display: none;
+}
