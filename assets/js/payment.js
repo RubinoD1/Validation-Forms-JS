@@ -1,11 +1,14 @@
 const fullName = document.getElementById("name");
 const cvv = document.getElementById("cvv");
+const cardNumber = document.getElementById("card-number");
 
 let fullNameError = false;//tracks if error message is active 
 let cvvError = false;//tracks if cvv error message is active
+let cardNumberError = false;//tracks if card number error message is active
 
 fullName.addEventListener('input', nameValidate);//full name event listener
 cvv.addEventListener('input', cvvValidate);//cvv event listener
+cardNumber.addEventListener('input', cardNumberValidate);//card number event listener
 
 //card holder name -- two characters in length with at least one space 
 function nameValidate(){
@@ -63,8 +66,46 @@ function cvvValidate(){
   }
 }
 
-//card number validate
+//card number validation
+function cardNumberValidate(){
+  let onlyNumbers = /^(?=.*[0-9])(?!.*\W)(?!.* )(?!.*[a-z])(?!.*[A-Z])(?!.*_).{16,16}$/;//only numbers allowed regex 
+  
+  switch(cardNumber.value.length){//if length is 4,9, or 14 add space to end of string
+    case 4:
+    case 9:
+    case 14:
+      cardNumber.value = `${cardNumber.value}` + " ";
+      break;
+    default://run if no case match
+      break;
+  }
+  //check if cardNumber value is only numbers and is 16 digits in length
+  if (onlyNumbers.test(cardNumber.value.replace(/ /g,'')) == true){//.replace is removing all spaces in the string & .test in then checking using the numbersOnly regex if the value has only numbers
+    fieldArray[1].valid = true; //field has valid input
+    document.getElementById("card-number-icon").innerHTML = `&#9989;`;//add checkmark &#9989;
+    cardNumber.classList.remove('invalid'); //remove class invalid 
+    if (cardNumberError == true){
+      cardNumberError = false;
+      document.getElementById("card-number-warning").remove();//remove card-number-warning created div
+    }
+    formValidationCheck();//run submit btn check 
+  }else {
+    fieldArray[1].valid = false;//field has invalid input
+    document.getElementById("card-number-icon").innerHTML = `&#10060;`;//add x icon &#10060;
+    cardNumber.classList.add('invalid');//add class invalid 
+    if (cardNumberError == false){
+      cardNumberError = true; 
+      const cardNumberWarning = document.createElement("div");
+      cardNumberWarning.innerHTML = 'Please enter a valid card number'
+      cardNumberWarning.style.color = 'red';
+      cardNumberWarning.setAttribute("id", "card-number-warning");
+      document.getElementById("card-number-icon").insertAdjacentElement("afterend", cardNumberWarning);
+    }
+    formValidationCheck();//run submit btn check 
+  }
+}
 
+//month / year validation
 
 
 //submit btn validation check 
@@ -85,6 +126,3 @@ let fieldArray = [
     {id: "month", valid: false},//3
     {id: "year", valid: false}//4
   ];
-
-
-
