@@ -4,7 +4,6 @@ const cardNumber = document.getElementById("card-number");
 const year = document.getElementById("year");
 const month = document.getElementById("month");
 
-
 let fullNameError = false;//tracks if error message is active 
 let cvvError = false;//tracks if cvv error message is active
 let cardNumberError = false;//tracks if card number error message is active
@@ -24,7 +23,7 @@ month.addEventListener("click", function(){
    }
 })
 
-// year validation
+//year validation
 year.addEventListener("click", function(){
   if (year.value != "year"){//input is not default list value
     fieldArray[4].valid = true; //field has valid input

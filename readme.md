@@ -20,6 +20,8 @@ Main Page
 Payment Form 
 - 
 
+
+
 User Registration Form 
 - The user registration form has six input fileds: first name, last name, email, username, password and re-type password. 
 - The first and last name fields check that the value entered by the user is not just empty spaces. Other than that the max character length allowed is set to 30 characters. 
@@ -48,6 +50,8 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 - The validity of the input fields is dynamically updated as the user interacts with the fields. 
 This is done using both HTML Unicode icons (checkmark (&#9989;) and x (&#10060;)) and also with error messages below each field that is not valid. 
 - On clicking the submit button a window alert is used to provide user feedback that their submission was successful.
+
+
 
 Product Review Form 
 - 

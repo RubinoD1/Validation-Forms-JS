@@ -1,0 +1,21 @@
+.radiowrapper {
+    font-size: 30px;
+}
+
+.radiowrapper input {
+    visibility:hidden; 
+    width:0;
+}
+
+.radiowrapper label:hover {
+    font-weight:bold;
+}
+
+.radiowrapper input:checked + label {
+    font-weight:bold; 
+    text-transform:uppercase;
+}
+
+.question {
+    font-weight: bold;
+}
