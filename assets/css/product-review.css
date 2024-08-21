@@ -19,3 +19,11 @@
 .question {
     font-weight: bold;
 }
+/* filter changes emoji to black and white */
+.emoji {
+    filter: grayscale(70%);
+}
+/* on hover remove filter */
+.emoji:hover {
+    filter: grayscale(0%);
+}
