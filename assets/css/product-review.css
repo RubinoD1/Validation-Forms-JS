@@ -1,3 +1,7 @@
+.invalid {
+    background-color: #fff6a9;
+}
+
 .radiowrapper {
     font-size: 30px;
 }
@@ -19,7 +23,7 @@
 .question {
     font-weight: bold;
 }
-/* filter changes emoji to black and white */
+/* filter reduces emoji colours */
 .emoji {
     filter: grayscale(70%);
 }
