@@ -1,5 +1,6 @@
 const comment = document.getElementById("comments");
 
+let selectedEmoji = "";
 let commentError = false;//tracks if comment error message is active 
 
 //on submit click confirm submit 
@@ -83,13 +84,20 @@ function validate(e){
   }
 }
 
-//emoji check 
 
+//emoji rating  
+function emoji(rating, id){
+  document.getElementById(`${id}`).classList.add("selected");
+  fieldArray[4].valid = true;//field has valid input
+  fieldArray[4].rating = `${rating}`;//set rating value
+  if(selectedEmoji != ""){ //if var not "" then remove class from previous selection 
+     document.getElementById(`${selectedEmoji}`).classList.remove("selected");
+  }
+  selectedEmoji = id;//set var to be used in removing the "selected" class if another emoji is selected
+  allFieldsCheck();//submit btn check call 
+}
 
-
-
-
-  //remove disabled attribute || re-add disabled attribute to submit btn
+//remove disabled attribute || re-add disabled attribute to submit btn
 function allFieldsCheck(){
   // Check if all 'valid' properties are true
   const allValid = fieldArray.every(obj => obj.valid === true);
@@ -106,6 +114,6 @@ let fieldArray = [
     {id: "quality", rating: 0 ,valid: false},//1
     {id: "features", rating: 0 ,valid: false},//2
     {id: "comment", valid: false},//3
-    {id: "emoji", valid: false}//4
+    {id: "emoji", valid: false, rating:""}//4
 ];
   

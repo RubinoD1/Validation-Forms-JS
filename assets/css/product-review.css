@@ -17,7 +17,6 @@
 
 .radiowrapper input:checked + label {
     font-weight:bold; 
-    text-transform:uppercase;
 }
 
 .question {
@@ -30,4 +29,8 @@
 /* on hover remove filter */
 .emoji:hover {
     filter: grayscale(0%);
+}
+
+.selected {
+    filter: none;
 }
