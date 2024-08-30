@@ -10,25 +10,6 @@ submit.onclick = function(){
 
 comment.addEventListener('input', validate);//comment event listener
 
-//star value event listeners 
-document.getElementById("value-1").onclick = function(){star("value" ,1, 0);}
-document.getElementById("value-2").onclick = function(){star("value" ,2, 0);}
-document.getElementById("value-3").onclick = function(){star("value" ,3, 0);}
-document.getElementById("value-4").onclick = function(){star("value" ,4, 0);}
-document.getElementById("value-5").onclick = function(){star("value" ,5, 0);}
-// star quality event listeners
-document.getElementById("quality-1").onclick = function(){star("quality" ,1, 1);}
-document.getElementById("quality-2").onclick = function(){star("quality" ,2, 1);}
-document.getElementById("quality-3").onclick = function(){star("quality" ,3, 1);}
-document.getElementById("quality-4").onclick = function(){star("quality" ,4, 1);}
-document.getElementById("quality-5").onclick = function(){star("quality" ,5, 1);}
-// star features event listeners
-document.getElementById("features-1").onclick = function(){star("features" ,1, 2);}
-document.getElementById("features-2").onclick = function(){star("features" ,2, 2);}
-document.getElementById("features-3").onclick = function(){star("features" ,3, 2);}
-document.getElementById("features-4").onclick = function(){star("features" ,4, 2);}
-document.getElementById("features-5").onclick = function(){star("features" ,5, 2);}
-
 function star(id, value, array){
  for(let i = 1; i < 6; i++){
   let name = id;
@@ -83,7 +64,6 @@ function validate(e){
     allFieldsCheck();//check if all fields valid
   }
 }
-
 
 //emoji rating  
 function emoji(rating, id){
