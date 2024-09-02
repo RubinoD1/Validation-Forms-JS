@@ -1,5 +1,5 @@
 body {
-    background-color: rgba(100, 148, 237, 0.473);
+    background-color: rgba(100, 148, 237, 28%);
 }
 
 #menu {
@@ -9,7 +9,7 @@ body {
     justify-content: center;
     align-content: center;
     border: 2px black solid;
-    background-color: #41bcb0;
+    background-color: #3F51B5;
 }
 
 button {
@@ -17,9 +17,9 @@ button {
     font-size: 20px;
     text-align: center;
     width:100%;
-    border: 2px solid #2196f3; 
+    border: 3px solid #FF9800; 
     margin: 5px;
-    /* transition-duration: 0.45s; */
+    padding: 20px;
 }
 
 a {
@@ -27,5 +27,5 @@ a {
 }
 
 a :hover{
-    border: 3px solid yellow;
+    border: 3px solid #12e11b;
 }

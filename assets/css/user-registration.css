@@ -17,3 +17,24 @@
 p {
     margin-bottom: -10px;
 }
+
+/* submit btn */
+#submit {
+    background-color: #fffaf0;
+}
+
+#submit:disabled {
+    background-color: #e7e7e7;
+}
+
+footer {
+    text-align: center;
+    margin-top:20px;
+}
+
+#home-btn {
+    font-size: 16px;
+    /* padding: 0px 20px 0px 20px; */
+    width:50%;
+    background-color: #f6f6f6;
+}

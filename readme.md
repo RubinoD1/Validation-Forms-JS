@@ -6,14 +6,10 @@ Client side validation is performed by a web browser, before input is sent to a 
 
 ## What is Validation Form JS?
 
+- style is purposefully minimalistic
+- CSS styles for elements such as the home btn are repeated in each CSS file on purpose.
 
-
-
-## To-do 
-
-Main Page 
-- Main page media breakpoints working. 
-- Simple style -- no frills minimalist. 
+- The purpose of this collection is various validation checks for user inputs. NO data is actually saved to local storage, or server-side. The submit btn on the forms is enabled once all fields are valid. When the submit btn is clicked the form is reset to its default state. 
 
 ## Form field information
 
@@ -54,4 +50,6 @@ This is done using both HTML Unicode icons (checkmark (&#9989;) and x (&#10060;)
 
 
 Product Review Form 
-- 
+- Star ratings: Three star ratings are included in the product review form: value for money, overall quality and features & functionality. The star rating is based on a 5-star rating scale. All star ratings are required in the product review form.   
+- Product review: A text are with a max character count of 3000 words. A minimum of 1 character is required in order for the product review to be valid. A validity check is in place that checks that the user input isn't simply spaces. 
+- Emoji rating: A 5-scale emoji rating is included for an overall satisfaction rating. The scale goes from very dissatisfied to very happy. This is a required field in order for the product review to be valid. HTML unicode was used for the emojis. 
