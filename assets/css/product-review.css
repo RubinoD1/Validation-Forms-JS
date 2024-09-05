@@ -51,62 +51,26 @@ footer {
 
 #home-btn {
     font-size: 16px;
-    width:25%;
+    width: 25%;
     background-color: #f6f6f6;
 }
 
 /* media breakpoints */
-/* tablet */
-@media only screen and (max-width: 1024px) {
-   form {
-    font-size: 2rem;
-   }
-    /* stars and emoji size */
-    .radiowrapper {
-        font-size: 55px;
-    }
-    /* btn size */
-    #home-btn {
-        font-size: 1.5rem;
-        padding: 10px 0px 10px 0px
-    }
-    /* comment box text size textarea*/
-    textarea {
-        width:100%;
-        font-size: 1.6rem;
-        /* helps textarea on smaller screen sizes stand out more from the form */
-        background-color: #f0f8ff3d;
-    }
-
-    #submit {
-        font-size: 2rem;
-        padding: 5px 15px 5px 15px;
-    }
-} 
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     form {
         display:flex;
-        font-size: 1rem;
     }
     
-    .radiowrapper {
-        font-size: 25px;
-    }
-
-    #home-btn {
-        font-size: 1rem;
-        padding: 0px;
-    }
-
     textarea {
         width:100%;
-        font-size: 1rem;
     }
 
     #submit {
-        font-size: 1rem;
         padding: 4px;
+    }
+
+    #home-btn {
+        width:40%;
     }
 }
