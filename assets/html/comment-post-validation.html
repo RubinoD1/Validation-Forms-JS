@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,44 +10,46 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../images/favicon/favicon.png">
 </head>
+
 <body>
-    
-    
     <form>
-      <fieldset>
-        <legend>Comment Form</legend>
-        <label>Name:<br />
-            <input type="text" name="name" id="name" placeholder="Enter a name" maxlength="30">
-            <span id="name-icon"></span>
-        </label>
-        <br />
-        <label>Email:<br />
-            <input type="email" name="email" id="email" placeholder="email@example.com" minlength="3" maxlength="64"/>
-            <span id="email-icon"></span>
-        </label>
-        <br />
-        <p>
-            <label for="comments">
-                Comments:
+        <fieldset>
+            <legend>Comment Form</legend>
+            <label>Name:<br />
+                <input type="text" name="name" id="name" placeholder="Enter a name" maxlength="30">
+                <span id="name-icon"></span>
             </label>
             <br />
-            <textarea rows="6" cols="40" id="comments" placeholder="Your comment here..." maxlength="200"></textarea>
-            <span id="comments-icon"></span>
-        </p>
-        <br />
-        <input type="submit" value="Submit" id="submit" disabled>
-      </fieldset>
+            <label>Email:<br />
+                <input type="email" name="email" id="email" placeholder="email@example.com" minlength="3"
+                    maxlength="64" />
+                <span id="email-icon"></span>
+            </label>
+            <br />
+            <p>
+                <label for="comments">
+                    Comments:
+                </label>
+                <br />
+                <textarea rows="6" cols="40" id="comments" placeholder="Your comment here..."
+                    maxlength="200"></textarea>
+                <span id="comments-icon"></span>
+            </p>
+            <br />
+            <input type="submit" value="Submit" id="submit" disabled>
+        </fieldset>
     </form>
-    
+
     <!-- footer with link to home page -->
     <br />
     <footer>
         <a href="/index.html">
-           <button id="home-btn">Home Page</button>
-         </a>
+            <button id="home-btn">Home Page</button>
+        </a>
     </footer>
 
     <!-- js file -->
     <script src="../js/comment.js"></script>
 </body>
+
 </html>

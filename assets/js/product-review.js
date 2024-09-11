@@ -20,12 +20,10 @@ function star(id, value, array){
     document.getElementById(`${name}` + "-" + `${i}`).innerHTML = `&#x2606;`;//white star unicode
    }
  }
-
  //set array value to valid and set rating
  fieldArray[`${array}`].valid = true;
  fieldArray[`${array}`].rating = `${value}`;
- //call submit btn check 
- allFieldsCheck();  
+ allFieldsCheck(); //call submit btn check   
 }
 
 //comment validation -- with character tracker 

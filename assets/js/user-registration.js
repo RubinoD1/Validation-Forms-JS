@@ -7,7 +7,7 @@ const lastName = document.getElementById("last-name");
 
 //passRegex: contains number, uppercase letter, special character, no space and is between 8 and 16 characters in length.
 const passRegex = /^(?=.*[0-9])(?=.*[A-Z])(?=.*\W)(?!.* ).{8,16}$/;
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//email reg expression validation
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;//email reg expression validation anything@anything.anything - no spaces
 
 let passError = false;//tracks if a password error message is active
 let rePassError = false;//tracks if repeat password error message is active
